@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\Users\denil\Desktop\Projeto Feira\Projeto Novo\Codigo\Teste\.metadata\.plugins\org.eclipse.jdt.core
+1450243251.index
+2502902422.index
+1865797976.index
