@@ -30,9 +30,5 @@ public class Pagamento{
     private void pagarCartao() {
         System.out.println("Pagamento via cartão realizado.");
     }
-    @Override
-    public String toString() {
-        return "Pagamento via ";
-    }
 }
 
