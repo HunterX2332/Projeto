@@ -1,49 +1,60 @@
 package entities;
+import enums.Status;
+import enums.MetodosPagamento;
 
+import java.util.Date;
 
-public class Pedido {
-	private String vendedor;
-	private Boolean status;
-	private String observacoes;
+public class Pedido extends Produto{
+	private Integer idPed;
+	private Date date;
+	private Status status;
+	private MetodosPagamento metodoPag;
 	
 	public Pedido() {
 	}
-	
-	public Pedido(String vendedor, Boolean status, String observacoes) {
-		
-		this.vendedor = vendedor;
+
+	public Pedido(Integer id, Date date, Status status,
+			MetodosPagamento metodoPag) {
+		this.idPed = id;
+		this.date = date;
 		this.status = status;
-		this.observacoes = observacoes;
+		this.metodoPag = metodoPag;
 	}
 
-
-	public String getVendedor() {
-		return vendedor;
+	public Pedido(int id, int quantidade, Double preco, Integer idPed, Date date) {
+		super();
+		this.idPed = idPed;
+		this.date = date;
 	}
 
-	public void setVendedor(String vendedor) {
-		this.vendedor = vendedor;
+	public Pedido(int id, String item, int quantidade, double preco) {
+		super(id,item,quantidade,preco);
 	}
 
-	public Boolean getStatus() {
+	public Integer getIdPed() {
+		return idPed;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public MetodosPagamento getMetodoPag() {
+		return metodoPag;
 	}
-
-	public String getObservacoes() {
-		return observacoes;
-	}
-
-	public void setObservacoes(String observacoes) {
-		this.observacoes = observacoes;
-	}
-	@Override
-  public String toString() {
-    return "Pedido{Vendedor='" + vendedor + "', Status=" + status + ", Observacao='" + observacoes + "'}";
-  }
-   
 	
+	public String toString(){
+		return "Id: " +
+				idPed +
+				"quantidade: " +
+				quantidade +
+				"Preco: " +
+				preco +
+				"Data: " +
+				date;
+	}
 }

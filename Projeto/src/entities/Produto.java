@@ -2,21 +2,21 @@ package entities;
 
 public class Produto {
 	private int id;
-	private String item;
-	private int quantidade;
-	private double preco;
+	private String nome;
+	protected int quantidade;
+	protected double preco;
 	
 	public Produto() {
 	}
-	
+
 	public Produto(int id, String item, int quantidade, double preco) {
 		this.id = id;
-		this.item =item;
+		this.nome =item;
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
 	public Produto(String item){
-		this.item = item;
+		this.nome = item;
 	}
 
 	public int getId() {
@@ -28,11 +28,11 @@ public class Produto {
 	}
 
 	public String getNome() {
-		return item;
+		return nome;
 	}
 
 	public void setNome(String item) {
-		this.item = item;
+		this.nome = item;
 	}
 
 	public int getQuantidade() {
@@ -52,7 +52,7 @@ public class Produto {
 	}
 	@Override
   public String toString() {
-    return "Produto{Id=" + id + ", Nome='" + item + "', Quantidade=" + quantidade + ", Preco=" + preco + "}";
+    return "Produto{Id=" + id + ", Nome='" + nome + "', Quantidade=" + quantidade + ", Preco=" + preco + "}";
   }
   
 }

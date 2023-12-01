@@ -1,82 +1,60 @@
 package application;
 
 import java.util.Scanner;
+import java.util.Date;
 import java.util.Locale;
 
 import entities.Cliente;
 import entities.Produto;
 import entities.Endereco;
 import entities.Pedido;
-import entities.ItemPedido;
 import entities.Pagamento;
 import entities.Telefone;
 import enums.MetodosPagamento;
 
 /* Sistema de Compra de produtos */
 
-public class Main {
+public class main {
 
 	public static void main(String[] args) {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 
 		// Cliente
-		System.out.println("Digite seu nome: ");
-		String Nome = sc.nextLine();
-		System.out.println("Digite seu email: ");
-		String Email = sc.nextLine();
+		System.out.println("Digite id do Cliente: ");
+		Integer idCliente = sc.nextInt();
+		System.out.println("Digite seu nome do Cliente: ");
+		String nome = sc.nextLine();
+		System.out.println("Digite seu email do Cliente: ");
+		String email = sc.nextLine();
 
-		Cliente cliente = new Cliente(Nome, Email);
+		Cliente cliente = new Cliente(idCliente, nome, email);
 
 		// Produto
+		System.out.println("Digite o ID do Produto: ");
+		int idProd = sc.nextInt();
 		System.out.println("Digite o nome do produto: ");
-		String produto = sc.nextLine();
-		System.out.println("Digite seu ID: ");
-		int Id = sc.nextInt();
-		System.out.println("Digite a quantidade: "); // Consumir a quebra de linha pendente
-		int Quantidade = sc.nextInt();
-		System.out.println("Digite o preço: ");
-		double Preco = sc.nextDouble();
+		String nomeProd = sc.nextLine();
+		System.out.println("Digite a quantidade do Produto: "); // Consumir a quebra de linha pendente
+		int quantProd = sc.nextInt();
+		System.out.println("Digite o preço do Produto: ");
+		double precoProd = sc.nextDouble();
 
-		Produto Product = new Produto(Id, produto, Quantidade, Preco);
-
-		// Endereço
-		System.out.println("Digite sua rua: ");
-		sc.next();
-		String rua = sc.nextLine();
-		System.out.println("Digite o numero: ");
-		int numerocomp = sc.nextInt();
-		sc.nextLine();
-		System.out.println("Digite o complemento: ");
-		String complemento = sc.nextLine();
-		System.out.println("Digite o bairro: ");
-		String bairro = sc.nextLine();
-
-		Endereco Endereco = new Endereco(rua, numerocomp, complemento, bairro);
-
-		// Item Pedido
-		System.out.println("Digite o Codigo: ");
-		int codigo = sc.nextInt();
-		System.out.println("Digite o item: ");
-		sc.next();
-		String Item = sc.nextLine();
-		Produto item = new Produto(Item);
-		System.out.println("Digite a quantidade pedida: ");
-		int quantidadePedida = sc.nextInt();
-
-		ItemPedido ItemPedido = new ItemPedido(codigo, item, quantidadePedida);
+		Produto Product = new Produto(idProd, nomeProd, quantProd, precoProd);
 
 		// Pedido
-		System.out.println("Digite o nome do vendedor: ");
-		sc.next();
-		String vendedor = sc.nextLine();
-		System.out.println("Digite o status: ");
-		boolean status = sc.nextBoolean();
-		System.out.println("Digite as observações: ");
-		sc.next();
-		String observacao = sc.nextLine();
+		System.out.println("Digite o nome do id: ");
+		int idPed = sc.nextInt();
+		System.out.println("Digite o id do produto: ");
+		int idProdBusca = sc.nextInt();
+		if(idProdBusca == idProd){
+			idProdBusca = idProd;
+		}
+		Date DataPed = new Date();
 
-		Pedido Pedido = new Pedido(vendedor, status, observacao);
+		Pedido Pedido = new Pedido(idProdBusca, Product.getQuantidade(), Product.getPreco(), idPed, DataPed);
+
+		System.out.println(Pedido);
 
 		// Pagamento
 		System.out.println("Digite o telefone: ");
@@ -93,7 +71,7 @@ public class Main {
 				metodoEscolhido = MetodosPagamento.PIX;
 				break;
 			case 2:
-				metodoEscolhido = MetodosPagamento.BOLETO;
+				metodoEscolhido = MetodosPagamento.DINHEIRO;
 				break;
 			case 3:
 				metodoEscolhido = MetodosPagamento.CARTAO;
@@ -107,8 +85,6 @@ public class Main {
 
 		System.out.println(cliente.toString());
 		System.out.println(Product.toString());
-		System.out.println(Endereco.toString());
-		System.out.println(ItemPedido.toString());
 		System.out.println(Pedido.toString());
 		System.out.println(Telefone.toString());
 		sc.close();

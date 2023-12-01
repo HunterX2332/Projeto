@@ -5,7 +5,7 @@ public class Pagamento{
 
     public void realizarPagamento(MetodosPagamento metodo) {
         switch (metodo) {
-            case BOLETO:
+            case DINHEIRO:
                 pagarBoleto();
                 break;
             case PIX:

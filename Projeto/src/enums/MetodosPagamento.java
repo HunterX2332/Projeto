@@ -1,7 +1,7 @@
 package enums;
 
 public enum MetodosPagamento {
-	BOLETO,
+	DINHEIRO,
   CARTAO,
   PIX
 }
