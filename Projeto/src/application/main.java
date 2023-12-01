@@ -79,12 +79,10 @@ public class Main {
 		Pedido Pedido = new Pedido(vendedor, status, observacao);
 
 		// Pagamento
-		System.out.println("Digite o tipo: ");
-		String tipo = sc.nextLine();
 		System.out.println("Digite o telefone: ");
 		int telefone = sc.nextInt();
 
-		Telefone Telefone = new Telefone(tipo, telefone);
+		Telefone Telefone = new Telefone(telefone);
 		System.out.println("Escolha o método de pagamento(1 - PIX, 2 - BOLETO, 3 - CARTÃO): ");
 		int escolha = sc.nextInt();
 
