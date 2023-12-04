@@ -6,87 +6,112 @@ import java.util.Locale;
 
 import entities.Cliente;
 import entities.Produto;
-import entities.Endereco;
 import entities.Pedido;
 import entities.Pagamento;
 import entities.Telefone;
 import enums.MetodosPagamento;
 
-/* Sistema de Compra de produtos */
+public class Main {
 
-public class main {
+    public static void main(String[] args) {
+        Locale.setDefault(Locale.US);
+        Scanner sc = new Scanner(System.in);
 
-	public static void main(String[] args) {
-		Locale.setDefault(Locale.US);
-		Scanner sc = new Scanner(System.in);
+        int escolha;
 
-		// Cliente
-		System.out.println("Digite id do Cliente: ");
-		Integer idCliente = sc.nextInt();
-		System.out.println("Digite seu nome do Cliente: ");
-		String nome = sc.nextLine();
-		System.out.println("Digite seu email do Cliente: ");
-		String email = sc.nextLine();
+        do {
+            exibirMenu();
+            escolha = sc.nextInt();
 
-		Cliente cliente = new Cliente(idCliente, nome, email);
+            switch (escolha) {
+                case 1:
+                    realizarCompra(sc);
+                    break;
+                case 2:
+                    // Adicione outras opções conforme necessário
+                    break;
+                case 0:
+                    System.out.println("Saindo do programa. Até mais!");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+            }
 
-		// Produto
-		System.out.println("Digite o ID do Produto: ");
-		int idProd = sc.nextInt();
-		System.out.println("Digite o nome do produto: ");
-		String nomeProd = sc.nextLine();
-		System.out.println("Digite a quantidade do Produto: "); // Consumir a quebra de linha pendente
-		int quantProd = sc.nextInt();
-		System.out.println("Digite o preço do Produto: ");
-		double precoProd = sc.nextDouble();
+        } while (escolha != 0);
 
-		Produto Product = new Produto(idProd, nomeProd, quantProd, precoProd);
+        sc.close();
+    }
 
-		// Pedido
-		System.out.println("Digite o nome do id: ");
-		int idPed = sc.nextInt();
-		System.out.println("Digite o id do produto: ");
-		int idProdBusca = sc.nextInt();
-		if(idProdBusca == idProd){
-			idProdBusca = idProd;
-		}
-		Date DataPed = new Date();
+    private static void exibirMenu() {
+        System.out.println("===== MENU =====");
+        System.out.println("1. Realizar Compra");
+        System.out.println("2. Outra opção");
+        System.out.println("0. Sair");
+        System.out.println("================");
+        System.out.println("Escolha a opção desejada: ");
+    }
 
-		Pedido Pedido = new Pedido(idProdBusca, Product.getQuantidade(), Product.getPreco(), idPed, DataPed);
+    private static void realizarCompra(Scanner sc) {
+    // Cliente
+    System.out.println("Digite id do Cliente: ");
+    Integer idCliente = sc.nextInt();
+    System.out.println("Digite seu nome do Cliente: ");
+    String nome = sc.next(); // Use next() em vez de nextLine() para evitar problemas com quebras de linha
+    System.out.println("Digite seu email do Cliente: ");
+    String email = sc.next();
 
-		System.out.println(Pedido);
+    Cliente cliente = new Cliente(idCliente, nome, email);
 
-		// Pagamento
-		System.out.println("Digite o telefone: ");
-		int telefone = sc.nextInt();
+    // Produto
+    System.out.println("Digite o ID do Produto: ");
+    int idProd = sc.nextInt();
+    System.out.println("Digite o nome do produto: ");
+    String nomeProd = sc.next();
+    System.out.println("Digite a quantidade do Produto: ");
+    int quantProd = sc.nextInt();
+    System.out.println("Digite o preço do Produto: ");
+    double precoProd = sc.nextDouble();
 
-		Telefone Telefone = new Telefone(telefone);
-		System.out.println("Escolha o método de pagamento(1 - PIX, 2 - BOLETO, 3 - CARTÃO): ");
-		int escolha = sc.nextInt();
+    Produto product = new Produto(idProd, nomeProd, quantProd, precoProd);
 
-		MetodosPagamento metodoEscolhido;
+    // Pedido
+    System.out.println("Digite o nome do id: ");
+    int idPed = sc.nextInt();
+    Date dataPed = new Date(); // Renomeei para seguir convenções de nomenclatura
 
-		switch (escolha) {
-			case 1:
-				metodoEscolhido = MetodosPagamento.PIX;
-				break;
-			case 2:
-				metodoEscolhido = MetodosPagamento.DINHEIRO;
-				break;
-			case 3:
-				metodoEscolhido = MetodosPagamento.CARTAO;
-				break;
-			default:
-				throw new IllegalArgumentException("Opção de pagamento inválida");
-				
-		}
-		Pagamento pagamento = new Pagamento();
-		pagamento.realizarPagamento(metodoEscolhido);
+    Pedido pedido = new Pedido(idProd, product.getQuantidade(), product.getPreco(), idPed, dataPed);
 
-		System.out.println(cliente.toString());
-		System.out.println(Product.toString());
-		System.out.println(Pedido.toString());
-		System.out.println(Telefone.toString());
-		sc.close();
-	}
+    System.out.println(pedido);
+
+    // Pagamento
+    System.out.println("Digite o telefone: ");
+    int telefone = sc.nextInt();
+
+    Telefone tel = new Telefone(telefone);
+    System.out.println("Escolha o método de pagamento (1 - PIX, 2 - BOLETO, 3 - CARTÃO): ");
+    int escolha = sc.nextInt();
+
+    MetodosPagamento metodoEscolhido;
+
+    switch (escolha) {
+        case 1:
+            metodoEscolhido = MetodosPagamento.PIX;
+            break;
+        case 2:
+            metodoEscolhido = MetodosPagamento.BOLETO;
+            break;
+        case 3:
+            metodoEscolhido = MetodosPagamento.CARTAO;
+            break;
+        default:
+            throw new IllegalArgumentException("Opção de pagamento inválida");
+    }
+
+    Pagamento pagamento = new Pagamento();
+    pagamento.realizarPagamento(metodoEscolhido);
+
+    System.out.println(cliente.toString());
+    System.out.println(product.toString());
+    System.out.println(pedido.toString());
+    System.out.println(tel.toString());
 }
