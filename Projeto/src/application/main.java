@@ -11,6 +11,10 @@ import entities.Pagamento;
 import entities.Telefone;
 import enums.MetodosPagamento;
 
+/* Sistema de compras */
+
+/* Descrição: Sistema Criado em Java para ser feita a compra de um determinado produto */
+
 public class Main {
 
     public static void main(String[] args) {
